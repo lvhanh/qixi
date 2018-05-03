@@ -10,11 +10,11 @@
 			margin: 0;
 		}
 		#content{
-			width: 60%;
-			height: 60%;
+			width: 100%;
+			height: 100%;
 			overflow: hidden;
-			left: 20%;
-			top: 20%;
+			/*left: 20%;
+			top: 20%;*/
 			position: absolute;
 			border: 1px solid #ccc;
 		}
@@ -25,8 +25,6 @@
 			position: relative;
 		}
 		.content_ul > li{
-			width: 100%;
-			height: 100%;
 			float: left;
 			background: #CAE1FF;
 			overflow: hidden;
@@ -34,10 +32,18 @@
 			color: red;
 		}
 		li:nth-child(2){
-			background: 9BCD9B;
+			background: #9BCD9B;
 		}
 		li:nth-child(3){
 			background: yellow;
+		}
+		#btn{
+			position: absolute;
+			bottom: 0;
+		}
+		.move{
+			width: 100px;
+			height: 50px;
 		}
 	</style>
 </head>
@@ -48,9 +54,12 @@
 			<li>画面二</li>
 			<li>画面三</li>
 		</ul>
+		<div id="btn">
+			<button class="move">移动</button>
+		</div>
 	</div>
 	<script type="text/javascript">
-		var num_li = $(".content_ul").find("li"); 
+		var num_li = $(".content_ul").find("li");
 		// ul下的所有子节点，即一个li的组
 		var width_div = $("#content").width(); 
 		var height_div = $("#content").height();
@@ -60,11 +69,18 @@
 			height : height_div + 'px'
 		});
 		// 设置每个li的宽高和div一致
-		$.each(Li,function(index){
-			Li = $(".content_ul:eq(index)");
+		$.each(num_li,function(index){
+			var Li = num_li.eq(index);
 			Li.css({
 				width : width_div + 'px',
 				height : height_div + 'px'
+			});
+		});
+		$(".move").click(function(){
+			$(".content_ul").css({
+				'transition-timing-function':'linear',
+				'transition-duration':'5000ms',
+				'transform':'translate3d(-' + (width_div * 2) +'px,0px,0px)'
 			});
 		});
 	</script>
