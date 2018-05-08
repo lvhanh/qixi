@@ -7,7 +7,6 @@
 	<title>七夕主题</title>
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link rel="stylesheet" type="text/css" href="../css/pageA.css">
-	<script type="text/javascript" src="../js/Swip.js"></script>
 </head>
 <body>
 	<div id="content">
@@ -29,28 +28,16 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		var swip = Swip($("#content"));
-		/*var backgroundCss = function(className){
-			var ele = $(''+className+'');
-			return {
-				height:ele.height(),
-				top:ele.position().top
-			};
-		};*/
-		var middleCss = $(".a_background_middle");
-		var pathY = middleCss.offset().top + middleCss.height()/2; //获取路中间点的Y轴坐标
-		var boyHeight = $("#boy").height();
-		$("#boy").css({
-			top : pathY - boyHeight +25 //将人物置于路中间
-		});
+		// 10秒走到中间位置
+		//var swip = Swip($("#content"));
 		$("button:first").click(function(){
-			$("#boy").transition({'left':$("#content").width()+'px'},10000,'linear');
-		});
-		$("button:last").click(function(){
-			var left = $("#boy").css('left'); //获取当前left
-			$("#boy").css('left',left); //给transition强制设置当前left的值达到暂停效果
-			$("#boy").addClass("pauseWalk");
+			var distX = Dist('x', 0.5);
+			var distY = Dist('y', 0.5);
+			Walk(10000, distX, distY);
 		});
 	</script>
+	<!--放下面不需要var swip = Swip($("#content"))加载-->
+	<script type="text/javascript" src="../js/Swip.js"></script>
+	<script type="text/javascript" src="../js/qixi.js"></script>
 </body>
 </html>
