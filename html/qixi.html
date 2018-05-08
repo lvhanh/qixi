@@ -7,6 +7,8 @@
 	<title>七夕主题</title>
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link rel="stylesheet" type="text/css" href="../css/pageA.css">
+	<script type="text/javascript" src="../js/Swip.js"></script>
+	<script type="text/javascript" src="../js/boyWalk.js"></script>
 </head>
 <body>
 	<div id="content">
@@ -24,20 +26,29 @@
 		<div id="boy" class="slowWalk"></div>
 		<div id="btn">
 			<button class="begin">开始动画</button>
-			<button class="pause">暂停动画</button>
 		</div>
 	</div>
 	<script type="text/javascript">
-		// 10秒走到中间位置
-		//var swip = Swip($("#content"));
-		$("button:first").click(function(){
-			var distX = Dist('x', 0.5);
-			var distY = Dist('y', 0.5);
-			Walk(10000, distX, distY);
+		var swip = Swip($("#content"));
+		var boy = boyWalk();
+		$(".begin").click(function(){
+			boy.walkTo(2000,0.2)
+				.then(function(){
+					boy.setColor('red')
+				})
+				.then(function(){
+					return boy.walkTo(2000,0.4)
+				})
+				.then(function(){
+					boy.setColor('yellow')
+				})
+				.then(function(){
+					return boy.walkTo(2000,0.6)
+				})
+				.then(function(){
+					boy.setColor('blue')
+				});
 		});
 	</script>
-	<!--放下面不需要var swip = Swip($("#content"))加载-->
-	<script type="text/javascript" src="../js/Swip.js"></script>
-	<script type="text/javascript" src="../js/qixi.js"></script>
 </body>
 </html>
