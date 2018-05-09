@@ -7,20 +7,44 @@
 	<title>七夕主题</title>
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link rel="stylesheet" type="text/css" href="../css/pageA.css">
+	<link rel="stylesheet" type="text/css" href="../css/pageB.css">
 	<script type="text/javascript" src="../js/Swip.js"></script>
 	<script type="text/javascript" src="../js/boyWalk.js"></script>
 </head>
 <body>
 	<div id="content">
 		<ul class="content_ul">
+			<!--第一幅画面-->
 			<li>
+				<!--背景-->
 				<div class="a_background">
 					<div class="a_background_top"></div>
 					<div class="a_background_middle"></div>
 					<div class="a_background_bottom"></div>
 				</div>
+				<!--云-->
+				<div class="cloudArea">
+					<div class="cloud cloud1"></div>
+					<div class="cloud cloud2"></div>
+				</div>
+				<!--太阳-->
+				<div id="sun"></div>
 			</li>
-			<li>画面二</li>
+			<!--第二幅画面-->
+			<li>
+				<div class="b_background"></div>
+				<!--图片预加载节点，不然切换图片会闪屏-->
+				<div class="b_background_preload"></div>
+				<!--商店-->
+				<div class="shop">
+					<div class="door">
+						<div class="door_left"></div>
+						<div class="door_right"></div>
+					</div>
+					<!--灯-->
+					<div class="lamp"></div>
+				</div>
+			</li>
 			<li>画面三</li>
 		</ul>
 		<div id="boy" class="slowWalk"></div>
@@ -31,24 +55,27 @@
 	<script type="text/javascript">
 		var swip = Swip($("#content"));
 		var boy = boyWalk();
+		function Scroll(time,proportionX){
+			var dist = $("#content").width() * proportionX;
+			swip.scrollTo(dist,time);
+		}
+		//////////////////////////////////
+		//--------动画处理--------------//
+		/////////////////////////////////
 		$(".begin").click(function(){
-			boy.walkTo(2000,0.2)
+			$("#sun").addClass("sunset");
+			$(".cloud1").addClass("smallCloud");
+			$(".cloud2").addClass("largeCloud");
+			boy.walkTo(5000,0.2)
 				.then(function(){
-					boy.setColor('red')
+					Scroll(5000,1);
 				})
 				.then(function(){
-					return boy.walkTo(2000,0.4)
-				})
-				.then(function(){
-					boy.setColor('yellow')
-				})
-				.then(function(){
-					return boy.walkTo(2000,0.6)
-				})
-				.then(function(){
-					boy.setColor('blue')
+					return boy.walkTo(5000,0.5);
 				});
-		});
+			});
+		//直接定位到第二幅画面
+		Scroll(0,1);
 	</script>
 </body>
 </html>
