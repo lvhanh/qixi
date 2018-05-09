@@ -21,10 +21,10 @@ function Swip(a){
 			height : height_div + 'px'
 		});
 	});
-	swip.scrollTo = function(x,speed){
+	swip.scrollTo = function(x,time){
 		container.css({
 			'transition-timing-function':'linear',
-			'transition-duration':speed + 'ms',
+			'transition-duration':time + 'ms',
 			'transform':'translate3d(-' + x +'px,0px,0px)'
 		});
 		return this;
