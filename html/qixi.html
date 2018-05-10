@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/pageA.css">
 	<link rel="stylesheet" type="text/css" href="../css/pageB.css">
 	<script type="text/javascript" src="../js/Swip.js"></script>
-	<script type="text/javascript" src="../js/boyWalk.js"></script>
+	<script type="text/javascript" src="../js/QiXi.js"></script>
 </head>
 <body>
 	<div id="content">
@@ -77,34 +77,7 @@
 			});*/
 		//直接定位到第二幅画面
 		Scroll(0,1);
-		////////////////////////////
-		//-------开门效果---------//
-		///////////////////////////
-		function doorAction(time,left,right){
-			var dtd = $.Deferred();
-			var count = 2;
-			// 等待动作完成
-			var complete = function(){
-				if(count == 1){
-					dtd.resolve();
-					return;
-				}
-				count--;
-			};
-			$(".door_left").transition({
-				'left' : left
-			},time,complete());
-			$(".door_right").transition({
-				'left' : right
-			},time,complete());
-			return dtd;
-		}
-		$(" button:first").click(function(){
-			doorAction(2000,'-50%','100%');
-		});
-		$("button:last").click(function(){
-			doorAction(2000,'0%','50%');
-		});
+		
 	</script>
 </body>
 </html>
