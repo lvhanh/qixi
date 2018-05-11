@@ -55,7 +55,6 @@
 	</div>
 	<script type="text/javascript">
 		var swip = Swip($("#content"));
-		var boy = boyWalk();
 		function Scroll(time,proportionX){
 			var dist = $("#content").width() * proportionX;
 			swip.scrollTo(dist,time);
@@ -78,6 +77,32 @@
 		//直接定位到第二幅画面
 		Scroll(0,1);
 		
+		var boy = boyWalk();
+		var action = function(){
+			boy.walkTo(2000,0.5)
+				.then(function(){ //暂停走路
+					boy.stopWalk();
+				})
+				.then(function(){ //开门
+					return openDoor();
+				})
+				.then(function(){ //开灯
+					bright();
+				})
+				.then(function(){ //走进商店
+					return boy.walktoShop(2000);
+				})
+				.then(function(){
+					return boy.takeFlower();
+				})
+				.then(function(){ //走出商店
+					return boy.walkoutShop(2000);
+				})
+				.then(function(){ //关灯
+					dark();
+				});
+		}
+		$("button:first").click(action);
 	</script>
 </body>
 </html>
