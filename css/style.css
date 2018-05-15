@@ -44,11 +44,19 @@ li:nth-child(3){
 	height: 300px;
 	background: url("http://img.mukewang.com/55ade248000198ae10550582.png") -0px -300px no-repeat;
 	position: absolute;
-	left: 5%;
-	top: 55%;
+	left: 0%;
+	top: 55%
 }
 /*慢走效果*/
-@keyframes boy_slow{
+@-webkit-keyframes boy_slow{
+	0% {background-position: -0px -300px;}
+	25%{background-position: -602px -0px;}
+	50%{background-position: -302px -300px;}
+	75%{background-position: -151px -300px;}
+	100%{background-position: -0px -300px;}
+}
+
+@-moz-keyframes boy_slow{
 	0% {background-position: -0px -300px;}
 	25%{background-position: -602px -0px;}
 	50%{background-position: -302px -300px;}
@@ -59,7 +67,7 @@ li:nth-child(3){
 	animation-name: boy_slow;
 	animation-duration: 950ms;
 	animation-iteration-count: infinite;
-	animation-timing-function: steps(1,start);
+	animation-timing-function: steps(1,start)
 }
 /*带花*/
 @-webkit-keyframes person-flower-slow {
@@ -104,12 +112,12 @@ li:nth-child(3){
 	-moz-animation-name: person-flower-slow;
 	-moz-animation-duration: 950ms;
 	-moz-animation-iteration-count : infinite;
-	-moz-animation-timing-function: steps(1,start);
+	-moz-animation-timing-function: steps(1,start)
 }
 /*暂停人物动作*/
 .pauseWalk{
 	-webkit-animation-play-state :paused;
-	-moz-animation-play-state :paused;
+	-moz-animation-play-state :paused
 }
 /*太阳动画*/
 #sun{
