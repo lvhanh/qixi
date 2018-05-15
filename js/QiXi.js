@@ -31,13 +31,13 @@ function doorAction(time,left,right){
 			return;
 		}
 		count--;
-	};
+	}
 	$(".door_left").transition({
 		'left' : left
-	},time,complete());
+	},time,complete);
 	$(".door_right").transition({
 		'left' : right
-	},time,complete());
+	},time,complete);
 	return dtd;
 }
 //开门
@@ -48,6 +48,19 @@ var openDoor = function(){
 var closeDoor = function () {
 	return doorAction(2000,'0%','50%');
 }
+
+/*
+*飞鸟
+*/
+var bird = {
+	ele : $("#bird"),
+	fly : function(){
+		this.ele.addClass("birdFly");
+		this.ele.transition({
+			'right': $("#content").width()
+		},15000,'linear');
+	}
+};
 
 /*
 *小孩走路
@@ -135,15 +148,16 @@ function boyWalk(){
 		walkPlay.done(function(){
 			$boy.css({
 				opacity : 0
-			});
+			})
 			defer.resolve();
-		});
+		})
 		return defer;
 	}
 
 	//走出商店
 	function walkOutShop(time){
-		var defer = $.Deferred(); 
+		var defer = $.Deferred();
+		restoreWalk(); 
 		var walkPlay = startRun({
 			transform : 'translateX('+boyTOdoor+'px),scale(1,1)',
 			opacity : 1
@@ -187,10 +201,10 @@ function boyWalk(){
 		//改变颜色
 		setColor : function(val){
 			$boy.css('background-color',val);
-		}
+		},
 		//取花
 		takeFlower : function(){
 			return takeFlower();
 		}
-	};
+	}
 }
