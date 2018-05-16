@@ -24,12 +24,6 @@ ul,li{
 	position: relative;
 	color: red;
 }
-li:nth-child(2){
-	background: #9BCD9B;
-}
-li:nth-child(3){
-	background: yellow;
-}
 #btn{
 	position: absolute;
 	bottom: 5%;
