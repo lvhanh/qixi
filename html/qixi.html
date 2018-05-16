@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/style.css" />
 	<link rel="stylesheet" type="text/css" href="../css/pageA.css" />
 	<link rel="stylesheet" type="text/css" href="../css/pageB.css" />
+	<link rel="stylesheet" type="text/css" href="../css/pageC.css" />
 </head>
 <body>
 	<div id="content">
@@ -45,12 +46,39 @@
 				<!--鸟-->
 				<div id="bird"></div>
 			</li>
-			<li>画面三</li>
+			<!--第三幅图-->
+			<li>
+				<!--背景-->
+				<div class="c_background">
+					<div class="c_background_top"></div>
+					<div class="c_background_middle"></div>
+					<div class="c_background_bottom"></div>
+				</div>
+				<!--小女孩-->
+				<div id="girl"></div>
+				<!--水波-->
+				<div class="bridge_bottom">
+					<div class="water">
+						<div class="water1"></div>
+						<div class="water2"></div>
+						<div class="water3"></div>
+						<div class="water4"></div>
+					</div>
+				</div>
+				<!--星星-->
+				<div class="star">
+					<div class="stars1"></div>
+					<div class="stars2"></div>
+					<div class="stars3"></div>
+					<div class="stars4"></div>
+					<div class="stars5"></div>
+					<div class="stars6"></div>
+				</div>
+			</li>
 		</ul>
 		<div id="boy" class="slowWalk"></div>
 		<div id="btn">
-			<button>开门</button>
-			<button>关门</button>
+			<button>开始</button>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -76,41 +104,26 @@
 				});
 			});*/
 		//直接定位到第二幅画面
-		Scroll(0,1);
+		Scroll(0,2);
 		
-		var boy = boyWalk();
-		var action = function(){
-			boy.walkTo(2000,0.5)
-				.then(function(){ //暂停走路
-					boy.stopWalk();
-				})
-				.then(function(){ //开门
-					return openDoor();
-				})
-				.then(function(){ //开灯
-					bright();
-				})
-				.then(function(){ //走进商店
-					return boy.walktoShop(2000);
-				})
-				.then(function(){ //取花
-					return boy.takeFlower();
-				})
-				.then(function(){
-					bird.fly();
-				})
-				.then(function(){ //走出商店
-					return boy.walkoutShop(2000);
-				})
-				.then(function(){
-					return closeDoor();
-				})
-				.then(function(){ //关灯
-					dark();
-				});
-		}
-		$("button:first").click(action);
+		/*小女孩位置*/
+		var bridgeY = $(".c_background_middle").offset().top;
+		var girlTop = bridgeY - $("#girl").height();
+		$("#girl").css({
+			'top' : girlTop
+		});
 
+		/*小男孩走路*/
+		var boy = boyWalk();
+		boy.takeFlower();
+		var visualHeight = $("#content").height();
+		var boyOnBridgeY = bridgeY - $("#boy").height();
+		$("button").click(function(){
+			boy.walkTo(2000,0.15)
+				.then(function(){
+					return walkTo(1500,0.25,boyOnBridgeY/visualHeight);
+				})
+		});
 	})
 	</script>
 	<script type="text/javascript" src="../js/Swip.js"></script>
