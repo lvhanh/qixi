@@ -117,12 +117,20 @@
 		var boy = boyWalk();
 		boy.takeFlower();
 		var visualHeight = $("#content").height();
-		var boyOnBridgeY = bridgeY - $("#boy").height();
+		var visualWidth = $("#content").width();
+		var boyOnBridgeY = bridgeY - $("#girl").height();
+		var proportionX = $("#girl").offset().left - $("#boy").width()+$("#girl").width()/5;
 		$("button").click(function(){
 			boy.walkTo(2000,0.15)
 				.then(function(){
-					return walkTo(1500,0.25,boyOnBridgeY/visualHeight);
+					return boy.walkTo(1500,0.25,boyOnBridgeY/visualHeight);
 				})
+				.then(function(){
+					return boy.walkTo(1500,proportionX/visualWidth);
+				})
+				.then(function(){
+					return boy.resetBoy();
+				});
 		});
 	})
 	</script>
