@@ -1,3 +1,12 @@
+/*动画结束事件*/
+var animationEnd = function(){
+	var explorer = navigator.userAgent;
+	if(~explorer.indexOf('WebKit')){
+		return 'webkitAnimationEnd';
+	}
+	return 'animationend';
+}
+
 /*
 *开灯效果
 */
