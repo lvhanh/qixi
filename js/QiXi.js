@@ -205,6 +205,11 @@ function boyWalk(){
 		//取花
 		takeFlower : function(){
 			return takeFlower();
+		},
+		//男孩恢复不动状态
+		resetBoy : function(){
+			this.stopWalk();
+			return $boy.removeClass("takeFlower slowWalk").addClass("boyOriginal");
 		}
 	}
 }
