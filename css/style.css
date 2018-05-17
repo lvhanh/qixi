@@ -113,6 +113,10 @@ ul,li{
 	-webkit-animation-play-state :paused;
 	-moz-animation-play-state :paused
 }
+/*男孩初始状态*/
+.boyOriginal {
+     background-position: -150px -0px;
+    }
 /*太阳动画*/
 #sun{
 	background: url("http://img.mukewang.com/55ade004000106c202010201.png") no-repeat;
