@@ -71,6 +71,56 @@ var bird = {
 	}
 };
 
+var bridgeY = function(){
+	return $(".c_background_middle").offset().top;
+}
+/*小女孩*/
+var girl = {
+	ele: $("#girl"),
+	girlHeight: function(){
+		return this.ele.height();
+	},
+	girlWidth: function(){
+		return this.ele.width();
+	},
+	girlTop: function(){
+		return bridgeY() - this.girlHeight();
+	},
+	girlLeft: function () {
+		return this.ele.offset().left;
+	},
+	girlLocation: function(){
+		this.ele.css({
+			'top': this.girlTop()
+		});
+	},
+	rotate: function(){
+		this.ele.addClass("girl-rotate");
+	}
+};
+
+/*logo*/
+var logo = {
+	ele: $(".logo"),
+	logoLight : function(){
+		this.ele.addClass("lightText");
+	},
+	logoShake: function(){
+		this.ele.addClass("logoShake");
+	},
+	run: function(){
+		this.logoLight().on(animationEnd(),function(){
+			this.logoShake.off();
+		});
+	}
+}
+
+var swip = Swip($("#content"));
+function Scroll(time,proportionX){
+	var dist = $("#content").width() * proportionX;
+	swip.scrollTo(dist,time);
+};
+
 /*
 *小孩走路
 */
@@ -218,7 +268,11 @@ function boyWalk(){
 		//男孩恢复不动状态
 		resetBoy : function(){
 			this.stopWalk();
-			return $boy.removeClass("takeFlower slowWalk").addClass("boyOriginal");
+			return $boy.removeClass("slowWalk").addClass("boyOriginal");
+		},
+		rotate: function(){
+			restoreWalk();
+			$boy.addClass("boy-rotate");
 		}
 	}
 }
