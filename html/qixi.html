@@ -78,18 +78,16 @@
 				<div class="logo"></div>
 			</li>
 		</ul>
+		<!--飘花-->
+		<div class="snowFlower"></div>
+		<!--男孩-->
 		<div id="boy" class="slowWalk"></div>
-		<div id="btn">
-			<button>开始</button>
-		</div>
+	</div>
+	<div id="btn">
+		<button>开始</button>
 	</div>
 	<script type="text/javascript">
 		$(function(){
-		var swip = Swip($("#content"));
-		function Scroll(time,proportionX){
-			var dist = $("#content").width() * proportionX;
-			swip.scrollTo(dist,time);
-		}
 		//////////////////////////////////
 		//--------动画处理--------------//
 		/////////////////////////////////
@@ -109,29 +107,31 @@
 		Scroll(0,2);
 		
 		/*小女孩位置*/
-		var bridgeY = $(".c_background_middle").offset().top;
-		var girlTop = bridgeY - $("#girl").height();
-		$("#girl").css({
-			'top' : girlTop
-		});
+		girl.girlLocation();
 
 		/*小男孩走路*/
 		var boy = boyWalk();
 		boy.takeFlower();
 		var visualHeight = $("#content").height();
 		var visualWidth = $("#content").width();
-		var boyOnBridgeY = bridgeY - $("#girl").height();
-		var proportionX = $("#girl").offset().left - $("#boy").width()+$("#girl").width()/5;
+		var proportionX = girl.girlLeft() - $("#boy").width()+girl.girlWidth()/5;
 		$("button").click(function(){
 			boy.walkTo(2000,0.15)
 				.then(function(){
-					return boy.walkTo(1500,0.25,boyOnBridgeY/visualHeight);
+					return boy.walkTo(1500,0.25,girl.girlTop()/visualHeight);
 				})
 				.then(function(){
 					return boy.walkTo(1500,proportionX/visualWidth);
 				})
 				.then(function(){
 					return boy.resetBoy();
+				})
+				.then(function(){
+					setTimeout(function(){
+						girl.rotate();
+						boy.rotate();
+						logo.run();
+					},1000);
 				});
 		});
 	})
