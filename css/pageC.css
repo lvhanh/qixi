@@ -308,3 +308,38 @@
 		-moz-transform :translate3d(10px,0,0);
 	}
 }
+
+/*飘花*/
+.snowFlower{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+.snowRoll{
+	animation-name: snowRoll;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	animation-duration: 20s;
+}
+@-webkit-keyframes snowRoll{
+	0% {
+		bottom: 100%;
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
+}
+@-moz-keyframes snowRoll{
+	0% {
+		bottom: 100%;
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
+}
