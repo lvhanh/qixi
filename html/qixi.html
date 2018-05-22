@@ -115,72 +115,32 @@
 		var visualHeight = $("#content").height();
 		var visualWidth = $("#content").width();
 		var proportionX = girl.girlLeft() - $("#boy").width()+girl.girlWidth()/5;
-		$("button").click(function(){
-			boy.walkTo(2000,0.15)
-				.then(function(){
-					return boy.walkTo(1500,0.25,girl.girlTop()/visualHeight);
-				})
-				.then(function(){
-					return boy.walkTo(1500,proportionX/visualWidth);
-				})
-				.then(function(){
-					return boy.resetBoy();
-				})
-				.then(function(){
-					setTimeout(function(){
-						girl.rotate();
-						boy.rotate();
-						logo.run();
-					},1000);
-				});
-		});
+		// $("button").click(function(){
+		// 	boy.walkTo(2000,0.15)
+		// 		.then(function(){
+		// 			return boy.walkTo(1500,0.25,girl.girlTop()/visualHeight);
+		// 		})
+		// 		.then(function(){
+		// 			return boy.walkTo(1500,proportionX/visualWidth);
+		// 		})
+		// 		.then(function(){
+		// 			return boy.resetBoy();
+		// 		})
+		// 		.then(function(){
+		// 			setTimeout(function(){
+		// 				girl.rotate();
+		// 				boy.rotate();
+		// 				logo.run();
+		// 			},1000);
+		// 		});
+		// });
 
-		///////////////
-		//---飘花----//
-		//////////////
-		var flowerImage = [
-			'http://img.mukewang.com/55adde120001d34e00410041.png',
-			'http://img.mukewang.com/55adde2a0001a91d00410041.png',
-			'http://img.mukewang.com/55adde5500013b2500400041.png',
-			'http://img.mukewang.com/55adde62000161c100410041.png',
-			'http://img.mukewang.com/55adde7f0001433000410041.png',
-			'http://img.mukewang.com/55addee7000117b500400041.png'
-		];
-		var snowFlower = function(){
-			var $snowFlower = $(".snowFlower");
-			var url = function(){
-				return flowerImage[Math.floor(Math.random()*6)];
-			}
-			var createFlower = function(){
-				 return $("<div class='roll'></div>").css({
-				'width' : 40,
-				'height' : 40,
-				'top' : 0,
-				'z-index' : 100,
-				'background-image' : 'url('+url()+')',
-				'position' : 'absolute'
-				}).addClass("snowRoll");
-			}
-			setInterval(function(){
-				var $flower = createFlower();
-				var flowerLeft = Math.random()*visualWidth - 100;
-				var flowerTop = Math.random()*visualHeight -100;
-				var flowerLastLeft = Math.random()*visualWidth;
-				var flowerLastTop = Math.random()*visualHeight;
-				var time = Math.random()*5000;
-				$flower.css({
-					'left' : flowerLeft,
-					'top' : flowerTop
-				});
-				$flower.transition({
-					'left' : flowerLastLeft,
-					'top' : flowerLastTop
-				},time,'ease-out');
-				$snowFlower.append($flower);
-			},200);
-		};
+		//播放音乐
 		$("button").click(function(){
-			snowFlower();
+			var audio = Html5Audio(music.playUrl);
+			audio.end(function(){
+				Html5Audio(music.loopUrl,true);
+			});
 		});
 	});
 	</script>
