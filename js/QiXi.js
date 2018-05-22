@@ -5,7 +5,7 @@ var animationEnd = function(){
 		return 'webkitAnimationEnd';
 	}
 	return 'animationend';
-}
+}();
 
 /*
 *开灯效果
@@ -109,8 +109,8 @@ var logo = {
 		this.ele.addClass("logoShake");
 	},
 	run: function(){
-		this.logoLight().on(animationEnd(),function(){
-			this.logoShake.off();
+		this.ele.addClass("lightText").on(animationEnd,function(){
+			$(this).addClass("logoShake");
 		});
 	}
 }
@@ -275,4 +275,71 @@ function boyWalk(){
 			$boy.addClass("boy-rotate");
 		}
 	}
+}
+
+/*飘花*/
+var flowerImage = [
+			'http://img.mukewang.com/55adde120001d34e00410041.png',
+			'http://img.mukewang.com/55adde2a0001a91d00410041.png',
+			'http://img.mukewang.com/55adde5500013b2500400041.png',
+			'http://img.mukewang.com/55adde62000161c100410041.png',
+			'http://img.mukewang.com/55adde7f0001433000410041.png',
+			'http://img.mukewang.com/55addee7000117b500400041.png'
+		];
+var snowFlower = function(){
+	var $snowFlower = $(".snowFlower");
+	var url = function(){
+		return flowerImage[[Math.floor(Math.random()*6)]];
+	}
+	var createFlower = function(){
+		var url1 = url();
+		return $("<div class='roll'></div>").css({
+		'width' : '40px',
+		'height' : '40px',
+		'top' : '-41px',
+		'z-index' : 100,
+		'background-image' : 'url('+url1+')',
+		'position' : 'absolute'
+		}).addClass("snowRoll");
+	};
+	setInterval(function(){
+		var visualWidth = $("#content").width();
+		var visualHeight = $("#content").height();
+		var $flower = createFlower();
+		var flowerLeft = Math.random()*visualWidth - 100;
+		var flowerLastLeft = flowerLeft-100+Math.random()*500;
+		var flowerLastTop = visualHeight -40;
+		var startOpacity = 1;
+		var randomOpacity = Math.random();
+		var time = Math.random()*5000 + visualHeight * 10;
+		randomOpacity = randomOpacity <0.5 ? 1:randomOpacity;
+		$flower.css({
+			'left' : flowerLeft,
+			'opacity' : randomOpacity
+		});
+		$snowFlower.append($flower);
+		$flower.transition({
+			'left' : flowerLastLeft,
+			'top' : flowerLastTop,
+			'opacity' : 0.7
+		},time,'ease-out',function(){$(this).remove();});
+	},200);
+};
+
+/*背景音乐*/
+var music = {
+	playUrl : 'http://www.imooc.com/upload/media/happy.wav', //正常播放的音乐
+	loopUrl : 'http://www.imooc.com/upload/media/circulation.wav' //循环播放的音乐
+};
+function Html5Audio(url,isloop){
+	var audio = new Audio(url); //创建音频对象
+	audio.autoplay = true;
+	audio.loop = isloop || false;
+	return {
+		end : function(func){
+			audio.addEventListener('ended',function(){
+				func();
+			},false);
+		}
+	};
 }
